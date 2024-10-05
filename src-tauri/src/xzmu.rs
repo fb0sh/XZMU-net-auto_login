@@ -30,10 +30,7 @@ pub struct XZMUM {
 }
 
 #[tauri::command]
-pub async fn init_app<R: Runtime>(
-    app: tauri::AppHandle<R>,
-    window: tauri::Window<R>,
-) -> Result<XZMUM, String> {
+pub async fn init_app<R: Runtime>(app: tauri::AppHandle<R>) -> Result<XZMUM, String> {
     let mut xzmu = XZMUM {
         account: None,
         config: None,
@@ -128,7 +125,6 @@ pub fn parse_login_url(url: &str) -> Result<XZMUNetConfig, String> {
 #[tauri::command]
 pub async fn save_account<R: Runtime>(
     app: tauri::AppHandle<R>,
-    window: tauri::Window<R>,
     username: String,
     password: String,
 ) -> Result<(), String> {
@@ -140,12 +136,7 @@ pub async fn save_account<R: Runtime>(
 }
 
 #[tauri::command]
-pub async fn login<R: Runtime>(
-    app: tauri::AppHandle<R>,
-    window: tauri::Window<R>,
-    account: XZMUAccount,
-    config: XZMUNetConfig,
-) -> Result<String, String> {
+pub async fn login(account: XZMUAccount, config: XZMUNetConfig) -> Result<String, String> {
     let mut headers = reqwest::header::HeaderMap::new();
     headers.insert(
         "User-Agent",

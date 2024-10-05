@@ -39,7 +39,7 @@ onMounted(async () => {
                 console.log(res);
                 // [Log] dr1003({"result":0,"msg":"ldap auth error","ret_code":1}); (Home.vue, line 24)
                 // [Log] dr1003({"result":1,"msg":"Portal协议认证成功！"}); (Home.vue, line 24)
-                let s = res as String;
+                let s = res as string;
                 if (s.includes("Portal")) {
                     show_success.value = true;
                 } else if (s.includes("ldap auth error")) {

@@ -2,10 +2,10 @@
   "$schema": "https://schema.tauri.app/config/2.0.0",
   "productName": "xzmu-net-auto_login",
   "version": "0.1.0",
-  "identifier": "com.xzmu-net-auto_login.app",
+  "identifier": "com.xzmu-net-auto-login.app",
   "build": {
     "beforeDevCommand": "pnpm dev",
-    "devUrl": "http://localhost:1420",
+    "devUrl": "http://localhost:14200",
     "beforeBuildCommand": "pnpm build",
     "frontendDist": "../dist"
   },

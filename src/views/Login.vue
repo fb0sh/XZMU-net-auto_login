@@ -7,7 +7,7 @@ const save_account_func = () => {
     invoke('save_account', {
         username: username.value,
         password: password.value,
-    }).then((res) => {
+    }).then(() => {
         console.log("save_account success");
         router.push('/');
     }).catch((err) => {
