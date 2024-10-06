@@ -52,6 +52,49 @@ pub async fn init_app<R: Runtime>(app: tauri::AppHandle<R>) -> Result<XZMUM, Str
     Ok(xzmu)
 }
 
+#[tauri::command]
+pub async fn test_xzmu_connection() -> bool {
+    let test_url = "http://120.95.80.23:8080/Self/login/";
+    // 创建带有超时设置的客户端
+    let client = reqwest::Client::builder()
+        .timeout(Duration::from_millis(1000)) // 设置超时为 1.5 秒
+        .build();
+
+    match client {
+        Ok(client) => match client.get(test_url).send().await {
+            Ok(res) => {
+                println!("{:?}", res);
+                true
+            }
+            Err(_) => false,
+        },
+        Err(_) => false,
+    }
+}
+
+#[tauri::command]
+pub async fn test_internet_connection() -> bool {
+    let test_url = "http://www.163.com/";
+    // 创建带有超时设置的客户端
+    let client = reqwest::Client::builder()
+        .timeout(Duration::from_millis(1000)) // 设置超时为 1.5 秒
+        .build();
+
+    match client {
+        Ok(client) => match client.get(test_url).send().await {
+            Ok(res) => {
+                let body = res.text().await.unwrap();
+                if body.contains("http://10.1.0.212") {
+                    return false;
+                }
+                true
+            }
+            Err(_) => false,
+        },
+        Err(_) => false,
+    }
+}
+
 pub fn get_xzmu_config<R: Runtime>(app: &AppHandle<R>) -> Result<PathBuf, String> {
     app.path()
         .app_data_dir()

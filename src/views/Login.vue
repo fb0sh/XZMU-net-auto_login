@@ -3,6 +3,9 @@ import { invoke } from '@tauri-apps/api/core';
 import { ref } from 'vue';
 import router from '../router';
 
+const username = ref('');
+const password = ref('');
+
 const save_account_func = () => {
     invoke('save_account', {
         username: username.value,
@@ -14,8 +17,7 @@ const save_account_func = () => {
         console.log(err)
     });
 };
-const username = ref('');
-const password = ref('');
+
 </script>
 <template>
     <v-sheet class="mx-auto mt-10" width="300">
